@@ -13,14 +13,14 @@ app.use((req,res,next)=>{
     console.log(log);
     fs.appendFile('server.log', log + '\n',(err) => {
         if (err) {
-            console.log('UNable to append to server.log.')
+            console.log('Unable to append to server.log.')
         }
     });
 next();
 });
-app.use((req,res,next)=>{
-    res.render('maintenance.hbs')
-});
+// app.use((req,res,next)=>{
+//     res.render('maintenance.hbs')
+// });
 app.use (express.static(__dirname+ '/public'));
 
 hbs.registerHelper('getCurrentYear', () =>{
@@ -34,9 +34,15 @@ return text.toUpperCase();
 app.get('/', (req,res)=>{
     res.render('home.hbs',{
         welcomeMessage: 'welcome to my website!!!!',
-        pageTitle: "Home Page",
+        pageTitle: "Home Page"
         
     });
+});
+app.get('/projects', (req,res) =>{
+    res.render('projects.hbs',{
+        pageTitle:'projects page',
+        welcomeMessage: 'welcome to the projects webpage!'
+    })
 });
 
 app.get('/about', (req,res)=>{
